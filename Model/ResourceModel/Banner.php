@@ -14,6 +14,8 @@ use Magento\Framework\Model\AbstractModel;
 use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
 use Rbj\BannerSlider\BannerImageUploader;
 use Rbj\BannerSlider\BannerMobileImageUploader;
+use Rbj\BannerSlider\Model\Banner\Image\Uploader;
+use Rbj\BannerSlider\Model\Banner\Image\Mobile\Uploader as MobileUploader;
 use Rbj\BannerSlider\Model\Banner as ModelBanner;
 
 class Banner extends AbstractDb
@@ -28,7 +30,7 @@ class Banner extends AbstractDb
     private $imageUploader;
 
     /**
-     * Image uploader
+     * Mobile Image uploader
      *
      * @var BannerMobileImageUploader
      */
@@ -128,32 +130,28 @@ class Banner extends AbstractDb
     /**
      * Get image uploader
      *
-     * @return BannerImageUploader
-     *
-     * @deprecated
+     * @return Uploader
      */
-    private function getImageUploader()
+    private function getImageUploader(): Uploader
     {
         if ($this->imageUploader === null) {
             $this->imageUploader = ObjectManager::getInstance()->get(
-                'Rbj\BannerSlider\BannerImageUploader'
+                BannerImageUploader::class
             );
         }
         return $this->imageUploader;
     }
 
     /**
-     * Get image uploader
+     * Get mobile image uploader
      *
-     * @return BannerMobileImageUploader
-     *
-     * @deprecated
+     * @return MobileUploader
      */
-    private function getMobileImageUploader()
+    private function getMobileImageUploader(): MobileUploader
     {
         if ($this->mobileImageUploader === null) {
             $this->mobileImageUploader = ObjectManager::getInstance()->get(
-                'Rbj\BannerSlider\BannerMobileImageUploader'
+                BannerMobileImageUploader::class
             );
         }
 
@@ -166,7 +164,7 @@ class Banner extends AbstractDb
      * @param DataObject $object
      * @return $this
      */
-    private function moveImage($object)
+    private function moveImage(DataObject $object)
     {
         $image = $object->getData('image', null);
 

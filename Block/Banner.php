@@ -74,7 +74,7 @@ class Banner extends Template
     /**
      * Item Collection
      *
-     * @return collection
+     * @return Collection
      */
     public function getItemCollection(): Collection
     {
