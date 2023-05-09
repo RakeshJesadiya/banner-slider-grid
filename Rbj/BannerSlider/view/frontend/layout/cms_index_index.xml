@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * CMS Index Action XML
+ *
+ * @author Rakesh Jesadiya <rakesh@rakeshjesadiya.com>
+ * @package Rbj_BannerSlider
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <referenceContainer name="page.top">
+        <block class="Rbj\BannerSlider\Block\Banner" name="banner.slider.main" template="Rbj_BannerSlider::bannerslider.phtml" after="header-wrapper" />
+    </referenceContainer>
+</page>

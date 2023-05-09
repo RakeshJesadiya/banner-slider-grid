@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Module's Global Dependency Injection XML
+ *
+ * @author Rakesh Jesadiya <rakesh@rakeshjesadiya.com>
+ * @package Rbj_BannerSlider
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Rbj\BannerSlider\Api\Data\BannerSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+    <preference for="Rbj\BannerSlider\Api\Data\BannerInterface" type="Rbj\BannerSlider\Model\Banner" />
+    <preference for="Rbj\BannerSlider\Api\BannerRepositoryInterface" type="Rbj\BannerSlider\Model\BannerRepository" />
+    <type name="Magento\Framework\Model\Entity\RepositoryFactory">
+        <arguments>
+            <argument name="entities" xsi:type="array">
+                <item name="Rbj\BannerSlider\Api\Data\BannerInterface" xsi:type="string">Rbj\BannerSlider\Api\BannerRepositoryInterface</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="banners_index_listing_data_source" xsi:type="string">Rbj\BannerSlider\Model\ResourceModel\Banner\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Rbj\BannerSlider\Model\ResourceModel\Banner\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">rbj_banner</argument>
+            <argument name="eventPrefix" xsi:type="string">rbj_banner_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">banner_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Rbj\BannerSlider\Model\ResourceModel\Banner</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Rbj\BannerSlider\BannerImageUploader" type="Rbj\BannerSlider\Model\Banner\Image\Uploader">
+        <arguments>
+            <argument name="baseTmpPath" xsi:type="string">banners/tmp/image</argument>
+            <argument name="basePath" xsi:type="string">banners/image</argument>
+            <argument name="allowedExtensions" xsi:type="array">
+                <item name="jpg" xsi:type="string">jpg</item>
+                <item name="jpeg" xsi:type="string">jpeg</item>
+                <item name="gif" xsi:type="string">gif</item>
+                <item name="png" xsi:type="string">png</item>
+            </argument>
+            <argument name="allowedMimeTypes" xsi:type="array">
+                <item name="jpg" xsi:type="string">image/jpg</item>
+                <item name="jpeg" xsi:type="string">image/jpeg</item>
+                <item name="gif" xsi:type="string">image/gif</item>
+                <item name="png" xsi:type="string">image/png</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Rbj\BannerSlider\Controller\Adminhtml\Index\Image\Upload">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Rbj\BannerSlider\BannerImageUploader</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Rbj\BannerSlider\BannerMobileImageUploader" type="Rbj\BannerSlider\Model\Banner\Image\Mobile\Uploader">
+        <arguments>
+            <argument name="baseTmpPath" xsi:type="string">banners/tmp/image</argument>
+            <argument name="basePath" xsi:type="string">banners/mobile/image</argument>
+            <argument name="allowedExtensions" xsi:type="array">
+                <item name="jpg" xsi:type="string">jpg</item>
+                <item name="jpeg" xsi:type="string">jpeg</item>
+                <item name="gif" xsi:type="string">gif</item>
+                <item name="png" xsi:type="string">png</item>
+            </argument>
+            <argument name="allowedMimeTypes" xsi:type="array">
+                <item name="jpg" xsi:type="string">image/jpg</item>
+                <item name="jpeg" xsi:type="string">image/jpeg</item>
+                <item name="gif" xsi:type="string">image/gif</item>
+                <item name="png" xsi:type="string">image/png</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Rbj\BannerSlider\Controller\Adminhtml\Index\Mobile\Upload">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Rbj\BannerSlider\BannerMobileImageUploader</argument>
+        </arguments>
+    </type>
+</config>

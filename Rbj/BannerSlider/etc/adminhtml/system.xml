@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Stores Configuration XML
+ *
+ * @author Rakesh Jesadiya <rakesh@rakeshjesadiya.com>
+ * @package Rbj_BannerSlider
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="rbj_tabs" translate="label" sortOrder="200">
+            <label>rbj_tabs</label>
+        </tab>
+        <section id="banners" translate="label" sortOrder="300" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Banner Settings</label>
+            <tab>rbj_tabs</tab>
+            <resource>Rbj_BannerSlider::config</resource>
+            <group id="general" translate="label" sortOrder="20" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
+                <field id="enabled" translate="label" sortOrder="10" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <comment>This will allow Banner Slider visible on frontend.</comment>
+                </field>
+            </group>
+            <group id="implementation" translate="label" type="text" sortOrder="140" showInWebsite="1" showInStore="1" showInDefault="1">
+                <frontend_model>Rbj\BannerSlider\Block\Adminhtml\System\Implementation</frontend_model>
+            </group>
+        </section>
+    </system>
+</config>

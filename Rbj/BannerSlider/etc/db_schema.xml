@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Database Structure Definition XML
+ *
+ * @author Rakesh Jesadiya <rakesh@rakeshjesadiya.com>
+ * @package Rbj_BannerSlider
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="rbj_banner" resource="default" engine="innodb" comment="Banner Table">
+        <column xsi:type="smallint" name="entity_id" padding="6" unsigned="false" nullable="false" identity="true"
+                comment="Entity Id"/>
+        <column xsi:type="varchar" name="title" nullable="false" length="255" comment="Banner Title"/>
+        <column xsi:type="smallint" name="is_active" padding="6" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Is Banner Active"/>
+        <column xsi:type="varchar" name="image" nullable="false" length="255" comment="Banner image"/>
+        <column xsi:type="varchar" name="mobile_image" nullable="false" length="255" comment="Banner mobile image"/>
+        <column xsi:type="varchar" name="content_url" nullable="true" length="255" comment="Banner content_url"/>
+        <column xsi:type="mediumtext" name="banner_content" nullable="true" comment="Banner Content"/>
+        <column xsi:type="timestamp" name="creation_time" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Banner Creation Time"/>
+        <column xsi:type="timestamp" name="update_time" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Banner Modification Time"/>
+        <column xsi:type="smallint" name="position" padding="6" unsigned="false" nullable="true" comment="Banner position"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <index referenceId="RBJ_BANNER_TITLE_CONTENT" indexType="fulltext">
+            <column name="title"/>
+            <column name="banner_content"/>
+        </index>
+    </table>
+    <table name="rbj_banner_store" resource="default" engine="innodb" comment="Banner To Store Linkage Table">
+        <column xsi:type="smallint" name="entity_id" padding="6" unsigned="false" nullable="false" identity="false"/>
+        <column xsi:type="smallint" name="store_id" padding="5" unsigned="true" nullable="false" identity="false"
+                comment="Store ID"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+            <column name="store_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="RBJ_BANNER_STORE_ENTITY_ID_RBJ_BANNER_ENTITY_ID" table="rbj_banner_store"
+                    column="entity_id" referenceTable="rbj_banner" referenceColumn="entity_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="RBJ_BANNER_STORE_STORE_ID_STORE_STORE_ID" table="rbj_banner_store"
+                    column="store_id" referenceTable="store" referenceColumn="store_id" onDelete="CASCADE"/>
+        <index referenceId="RBJ_BANNER_STORE_STORE_ID" indexType="btree">
+            <column name="store_id"/>
+        </index>
+    </table>
+</schema>

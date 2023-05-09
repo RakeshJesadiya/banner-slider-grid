@@ -1,0 +1,61 @@
+<?php
+/**
+ * @author Rakesh Jesadiya <rakesh@rakeshjesadiya.com>
+ * @package Rbj_BannerSlider
+ */
+
+use Rbj\BannerSlider\Block\Banner;
+
+/**
+ * BannerSlider Template
+ *
+ * @var $block Banner
+ */
+?>
+
+<?php $enabled = $block->isAllowed();?>
+
+<?php if($enabled):?>
+
+	<?php $bannerCollection = $block->getItemCollection(); ?>
+
+	<?php if($bannerCollection->count()): ?>
+
+		<div id="banners-slider" class="block-banners-slider">
+		    <div id="loading">
+		        <img src="<?php echo $block->getViewFileUrl('Rbj_BannerSlider::images/eclipse.gif'); ?>"
+		             alt="<?php /* @escapeNotVerified */ echo __('Loading...'); ?>"
+		             >
+		    </div>
+		 	<div id="hpTopSlider" class="hpTopSlider owl-carousel owl-theme" style="display: none;">
+		 		<?php foreach ($bannerCollection as $banner): ?>
+			        <div class="hSl banner-wrapper">
+						<a href="<?php echo $block->getUrl($banner->getContentUrl()); ?>" target="_blank" class="Banner-showMO Banner-hideDT mobile-banner">
+							<img src="<?php echo $block->getImageUrl($banner->getMobileImage(), 'banners/mobile/image'); ?>" class="img-responsive" title="<?php echo $banner->getTitle(); ?>" alt="<?php echo $banner->getTitle(); ?>" />
+						</a>
+					</div>
+				<?php endforeach; ?>
+		    </div>
+		</div>
+		<script type="text/javascript">
+		    require([
+		    	'jquery',
+		    	'OwlCarousel'
+	    	], function($) {
+		        $(function(){
+	                $('#hpTopSlider').owlCarousel({
+	                    "autoplay":true,
+	                    "autoplayTimeout":3000,
+	    				"autoplayHoverPause":true,
+	                    "items":1,
+						"loop":true,
+						"nav":false
+	                });
+
+		            $(".block-banners-slider .hpTopSlider").css("display", "block");
+		            $(".block-banners-slider #loading").css("display", "none");
+		        })
+		    });
+		</script>
+	<?php endif; ?>
+<?php endif;?>

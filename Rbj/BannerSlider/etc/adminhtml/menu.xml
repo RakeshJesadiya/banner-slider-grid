@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Menu Declaration XML
+ *
+ * @author Rakesh Jesadiya <rakesh@rakeshjesadiya.com>
+ * @package Rbj_BannerSlider
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Rbj_BannerSlider::banners" title="Banner Slider" translate="title" module="Rbj_BannerSlider" sortOrder="55" resource="Rbj_BannerSlider::banners"/>
+        <add id="Rbj_BannerSlider::manage_banners" title="Manage Banners" module="Rbj_BannerSlider" resource="Rbj_BannerSlider::manage_banners" parent="Rbj_BannerSlider::banners" action="banners/index/index"/>
+        <add id="Rbj_BannerSlider::manage_config" title="Configurations" module="Rbj_BannerSlider" resource="Rbj_BannerSlider::manage_config" parent="Rbj_BannerSlider::banners" action="adminhtml/system_config/edit/section/banners"/>
+    </menu>
+</config>
